@@ -1,19 +1,20 @@
-import { Component } from "react";
+import { Component } from 'react';
+import { initialFishes } from './fishesNames';
 
-const totalCount = 0;
-const correctCount = 0;
-
-export class ClassFinalScore extends Component {
-  render() {
-    return (
-      <div id="final-score">
-        <h1>Your Final Score Was</h1>
-        <div id="score">
-          <p>{correctCount}</p>
-          <hr />
-          <p>{totalCount}</p>
-        </div>
-      </div>
-    );
-  }
+type CorrectCountType = {
+    correctCount: number;
+};
+export class ClassFinalScore extends Component<CorrectCountType> {
+    render() {
+        return (
+            <div id="final-score">
+                <h1>Your Final Score Was</h1>
+                <div id="score">
+                    <p>{this.props.correctCount}</p>
+                    <hr />
+                    <p>{initialFishes.length}</p>
+                </div>
+            </div>
+        );
+    }
 }
