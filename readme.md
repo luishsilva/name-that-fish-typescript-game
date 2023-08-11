@@ -23,15 +23,15 @@ To get this project setup, you should:
 
 ### Standard Requirements
 
-- [ ] Setup eslint
-- [ ] Pass all linting checks
+- [ x ] Setup eslint
+- [ x ] Pass all linting checks
 
 - To check if linting passes, run `npm run lint`
 
-- [ ] Format code with prettier
-- [ ] State should not be duplicated
-- [ ] Variables should be named logicially
-- [ ] No unneccessary console logs
+- [ x ] Format code with prettier
+- [ x ] State should not be duplicated
+- [ x ] Variables should be named logicially
+- [ x ] No unneccessary console logs
 - [ ] No commented out blocks of code (Code comments are fine)
 - [ ] Setup a github repository with your submission as the `main` branch, you will submit a link to this for grading (NOT A ZIP FILE)
 

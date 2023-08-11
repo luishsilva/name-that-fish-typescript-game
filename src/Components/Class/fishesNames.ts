@@ -1,20 +1,20 @@
-import { Images } from "../../assets/Images";
+import { Images } from '../../assets/Images';
 
 export const initialFishes = [
   {
-    name: "trout",
+    name: 'trout',
     url: Images.trout,
   },
   {
-    name: "salmon",
+    name: 'salmon',
     url: Images.salmon,
   },
   {
-    name: "tuna",
+    name: 'tuna',
     url: Images.tuna,
   },
   {
-    name: "shark",
+    name: 'shark',
     url: Images.shark,
-  }
+  },
 ];

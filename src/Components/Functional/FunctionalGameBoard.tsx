@@ -1,21 +1,21 @@
-import "./styles/game-board.css";
-import { Images } from "../../assets/Images";
+import './styles/game-board.css';
+import { Images } from '../../assets/Images';
 
 const initialFishes = [
   {
-    name: "trout",
+    name: 'trout',
     url: Images.trout,
   },
   {
-    name: "salmon",
+    name: 'salmon',
     url: Images.salmon,
   },
   {
-    name: "tuna",
+    name: 'tuna',
     url: Images.tuna,
   },
   {
-    name: "shark",
+    name: 'shark',
     url: Images.shark,
   },
 ];
