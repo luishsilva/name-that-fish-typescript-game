@@ -1,36 +1,53 @@
-import { Component } from "react";
-import { ClassScoreBoard } from "./ClassScoreBoard";
-import { ClassGameBoard } from "./ClassGameBoard";
-import { ClassFinalScore } from "./ClassFinalScore";
-import  { CounterType }  from "../../types"
+import { Component } from 'react';
+import { ClassScoreBoard } from './ClassScoreBoard';
+import { ClassGameBoard } from './ClassGameBoard';
+import { ClassFinalScore } from './ClassFinalScore';
+import { ScoreBoardType } from '../../types';
+import { initialFishes } from './fishesNames';
 
 export class ClassApp extends Component {
-  state: CounterType = {
-    incorrectCount: 0,
-    correctCount: 0,
-  };
+    state: ScoreBoardType = {
+        incorrectCount: 0,
+        correctCount: 0,
+        nameFishes: [...initialFishes],
+    };
 
-  handleIncorrectCountCount = () => {
-    this.setState({
-      incorrectCount: this.state.incorrectCount + 1
-    });
-  }
+    handleIncorrectCount = () => {
+        this.setState({
+            incorrectCount: this.state.incorrectCount + 1,
+        });
+        this.state.nameFishes.shift();
+    };
 
-  render() {
-    const { incorrectCount, correctCount } = this.state
-    return (
-      <>
-        <>
-          <ClassScoreBoard 
-            incorrectCount={incorrectCount}
-            correctCount={correctCount}
-          />
-          <ClassGameBoard 
-            handleIncorrectCountCount={this.handleIncorrectCountCount}
-          />
-        </>
-        {false && <ClassFinalScore />}
-      </>
-    );
-  }
+    handleCorrectCount = () => {
+        this.setState({
+            correctCount: this.state.correctCount + 1,
+        });
+        this.state.nameFishes.shift();
+    };
+
+    render() {
+        const { incorrectCount, correctCount, nameFishes } = this.state;
+        return (
+            <>
+                {nameFishes.length > 0 && (
+                    <>
+                        <ClassScoreBoard
+                            incorrectCount={incorrectCount}
+                            correctCount={correctCount}
+                            nameFishes={nameFishes}
+                        />
+                        <ClassGameBoard
+                            handleIncorrectCount={this.handleIncorrectCount}
+                            handleCorrectCount={this.handleCorrectCount}
+                            nameFishes={nameFishes}
+                        />
+                    </>
+                )}
+                {nameFishes.length === 0 && (
+                    <ClassFinalScore correctCount={correctCount} />
+                )}
+            </>
+        );
+    }
 }
