@@ -42,7 +42,7 @@ export class ClassGameBoard extends Component<GameBoardType> {
 
   render() {
     const { nameFishes } = this.props;
-    const nextFishToName = nameFishes[0] ? nameFishes[0] : initialFishes[3];
+    const nextFishToName = nameFishes[0] ? nameFishes[0] : initialFishes[initialFishes.length];
     return (
       <div id="game-board">
         <div id="fish-container">
