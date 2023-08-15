@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { initialFishes } from './fishesNames';
 import './styles/game-board.css';
 
-export type GameBoardType = {
+type GameBoardType = {
   incorrectCount: number;
   correctCount: number;
   setIncorrectCount: React.Dispatch<React.SetStateAction<number>>;
