@@ -4,21 +4,18 @@ import './styles/score-board.css';
 type ScoreBoardType = {
   incorrectCount: number;
   correctCount: number;
-  nameFishes: {
-    name: string;
-    url: string;
-  }[];
+  answersLeft: string[];
 };
 
 export function FunctionalScoreBoard(props: ScoreBoardType) {
-  const {incorrectCount, correctCount, nameFishes} = props;
+  const {incorrectCount, correctCount, answersLeft} = props;
   return (
     <div id="score-board">
       <div>Incorrect 🔻: {incorrectCount}</div>
       <div id="choices-left">
-        {nameFishes.map((fish) => (
-          <div key={fish.name} className="choice">
-            {fish.name}
+        {answersLeft.map((fish) => (
+          <div key={fish} className="choice">
+            {fish}
           </div>
         ))}
       </div>

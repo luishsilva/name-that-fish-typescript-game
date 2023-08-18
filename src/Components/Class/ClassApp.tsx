@@ -2,49 +2,64 @@ import { Component } from 'react';
 import { ClassScoreBoard } from './ClassScoreBoard';
 import { ClassGameBoard } from './ClassGameBoard';
 import { ClassFinalScore } from './ClassFinalScore';
-import { ScoreBoardType } from '../../types';
 import { initialFishes } from './fishesNames';
 
+type ClassAppType = {
+  incorrectCount: number;
+  correctCount: number;
+  fishIndex: number;
+}
+
 export class ClassApp extends Component {
-  state: ScoreBoardType = {
+  state: ClassAppType = {
     incorrectCount: 0,
     correctCount: 0,
-    nameFishes: [...initialFishes],
+    fishIndex: 0,
   };
 
   handleIncorrectCount = () => {
     this.setState({
       incorrectCount: this.state.incorrectCount + 1,
     });
-    this.state.nameFishes.shift();
   };
 
   handleCorrectCount = () => {
     this.setState({
       correctCount: this.state.correctCount + 1,
     });
-    this.state.nameFishes.shift();
   };
 
+  handleAnswer = (answer: string) => {
+    const {fishIndex} = this.state
+    initialFishes[fishIndex].name === answer 
+      ? this.handleCorrectCount() 
+      : this.handleIncorrectCount();
+      
+      this.setState({
+        fishIndex: fishIndex + 1
+      })
+  }
+
   render() {
-    const { incorrectCount, correctCount, nameFishes } = this.state;
+    const { correctCount, incorrectCount, fishIndex } = this.state;
+    const answersLeft = initialFishes.map((fish) => fish.name);
+    const isGameOver = fishIndex === initialFishes.length;
     return (
       <>
-        {nameFishes.length > 0 && (
+        {!isGameOver && (
           <>
             <ClassScoreBoard
               incorrectCount={incorrectCount}
               correctCount={correctCount}
-              nameFishes={nameFishes}
+              answersLeft={answersLeft.slice(fishIndex)}
             />
             <ClassGameBoard
-              handleIncorrectCount={this.handleIncorrectCount}
-              handleCorrectCount={this.handleCorrectCount}
-              nameFishes={nameFishes}
+              fishData={initialFishes[fishIndex]}
+              handleAnswer={this.handleAnswer}
             />
           </>
         )}
-        {nameFishes.length === 0 && (
+        {isGameOver && (
           <ClassFinalScore correctCount={correctCount} />
         )}
       </>

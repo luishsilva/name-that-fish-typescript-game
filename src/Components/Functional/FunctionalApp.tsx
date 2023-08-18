@@ -6,35 +6,39 @@ import { FunctionalFinalScore } from './FunctionalFinalScore';
 
 import { initialFishes } from './fishesNames';
 
-type NameFishesType = {
-  name: string;
-  url: string;
-}[];
 
 export function FunctionalApp() {
 
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
-  const [nameFishes, setNameFishes] = useState<NameFishesType>([...initialFishes]);
+
+  const fishIndex = correctCount + incorrectCount;
+  const isGameOver = fishIndex === initialFishes.length;
+
+  const answersLeft = initialFishes.map((fish) => fish.name)
+
+  const handleAnswer = (answer: string) => {
+    initialFishes[fishIndex].name === answer 
+      ? setCorrectCount(correctCount + 1) 
+      : setIncorrectCount(incorrectCount + 1);
+  }
+
   return (
     <>
-    {nameFishes.length > 0 && (
+    {!isGameOver && (
       <>
         <FunctionalScoreBoard 
           incorrectCount={incorrectCount}
           correctCount={correctCount}
-          nameFishes={nameFishes}
+          answersLeft={answersLeft.slice(fishIndex)}
         />
         <FunctionalGameBoard
-          incorrectCount={incorrectCount}
-          correctCount={correctCount}
-          nameFishes={nameFishes}
-          setIncorrectCount={setIncorrectCount}
-          setCorrectCount={setCorrectCount}
+          fishData={initialFishes[fishIndex]}
+          handleAnswer={handleAnswer}
         />
       </>
     )}
-    {nameFishes.length === 0 && 
+    {isGameOver && 
       <FunctionalFinalScore 
         total={initialFishes.length}
         correctCount={correctCount}

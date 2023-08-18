@@ -2,5 +2,6 @@
 export type ScoreBoardType = {
   incorrectCount: number;
   correctCount: number;
-  nameFishes: Array<{ name: string; url: string }>;
+  answersLeft: string[];
+  fishIndex: number,
 };
